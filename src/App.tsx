@@ -15,13 +15,14 @@ import { Layout } from './App-styles'
 
 const App: React.FC = () => {
   const { page, routeHandler } = useRoute()
-  
+
   const {
     personalData,
     onChangeChildInput,
     onChangeFormInput,
     onAddChild,
     onDeleteChild,
+    MAX_NUMBER_OF_CHILDREN,
   } = useForm()
 
   return (
@@ -38,11 +39,10 @@ const App: React.FC = () => {
               onChangeFormInput={onChangeFormInput}
               onDeleteChild={onDeleteChild}
               routeHandler={routeHandler}
+              MAX_NUMBER_OF_CHILDREN={MAX_NUMBER_OF_CHILDREN}
             />
           ) : page === 'preview' ? (
-            <Preview
-              personalData={personalData}
-            />
+            <Preview personalData={personalData} />
           ) : null}
           <Footer />
         </Layout>

@@ -1,6 +1,9 @@
-import { FormLayout } from './Form-styles'
+import { FormLayout, ChildrenInputsContainer } from './Form-styles'
 import { IForm } from '../../Types'
 import Input from '../UI/Input/Input'
+import Button from '../UI/Button/Button'
+import Icon from '../UI/Icon/Icon'
+import colors from '../../theme/themeСolors'
 
 interface Props {
   personalData: IForm
@@ -9,6 +12,7 @@ interface Props {
   onAddChild: (e: React.ChangeEvent<any>) => void
   onDeleteChild: (e: React.ChangeEvent<any>) => void
   routeHandler: (e: React.ChangeEvent<any>) => void
+  MAX_NUMBER_OF_CHILDREN: number
 }
 
 const Form: React.FC<Props> = ({
@@ -18,50 +22,68 @@ const Form: React.FC<Props> = ({
   onAddChild,
   onDeleteChild,
   routeHandler,
+  MAX_NUMBER_OF_CHILDREN,
 }) => {
   return (
     <FormLayout>
       <h2>Персональные данные</h2>
       <div className='Form_inputs-container'>
-        <Input name={'name'} value={personalData.name} onChange={onChangeFormInput} />
+        <Input
+          name={'name'}
+          value={personalData.name}
+          onChange={onChangeFormInput}
+          label={'Имя'}
+        />
         <Input
           name={'age'}
           value={personalData.age}
           onChange={onChangeFormInput}
           inputmode={'numeric'}
           type={'number'}
+          label={'Возраст'}
         />
       </div>
       <div className='Form_children-container'>
         <header>
-          <h2>Дети (макс. 5)</h2>
-          <button onClick={onAddChild}>Добавить ребенка</button>
+          <h2>Дети (макс. {MAX_NUMBER_OF_CHILDREN})</h2>
+          {personalData.children.length < MAX_NUMBER_OF_CHILDREN ? (
+            <Button clickHandler={onAddChild} type={'secondary'}>
+              <Icon type={'plus'} color={colors.primary} />
+              Добавить ребенка
+            </Button>
+          ) : null}
         </header>
-        {personalData.children.map((child, index) => {
-          return (
-            <div key={child.id}>
-              <Input
-                name={`name_${index}`}
-                value={child.name}
-                onChange={onChangeChildInput}
-              />
-              <Input
-                name={`age_${index}`}
-                value={child.age}
-                onChange={onChangeChildInput}
-                inputmode={'numeric'}
-                type={'number'}
-              />
-              <button value={index} onClick={onDeleteChild}>
-                Удалить
-              </button>
-            </div>
-          )
-        })}
+        <div className='test'>
+          {personalData.children.map((child, index) => {
+            return (
+              <ChildrenInputsContainer key={child.id}>
+                <Input
+                  name={`name_${index}`}
+                  value={child.name}
+                  onChange={onChangeChildInput}
+                  label={'Имя'}
+                />
+                <Input
+                  name={`age_${index}`}
+                  value={child.age}
+                  onChange={onChangeChildInput}
+                  inputmode={'numeric'}
+                  type={'number'}
+                  label={'Возраст'}
+                />
+                <Button value={index} clickHandler={onDeleteChild} type={'link'}>
+                  Удалить
+                </Button>
+              </ChildrenInputsContainer>
+            )
+          })}
+        </div>
       </div>
-      <button name='preview' onClick={routeHandler}>
-        Сохранить
-      </button>
+      {personalData.children.length ? (
+        <Button name={'preview'} clickHandler={routeHandler} type={'primary'}>
+          Сохранить
+        </Button>
+      ) : null}
     </FormLayout>
   )
 }

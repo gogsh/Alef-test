@@ -10,7 +10,7 @@ const useForm = () => {
   })
 
   const onAddChild = () => {
-    if (personalData.children.length <= MAX_NUMBER_OF_CHILDREN) {
+    if (personalData.children.length < MAX_NUMBER_OF_CHILDREN) {
       const arrayDuplicate = [...personalData.children]
       arrayDuplicate.push({
         name: '',
@@ -61,6 +61,7 @@ const useForm = () => {
     onChangeFormInput,
     onAddChild,
     onDeleteChild,
+    MAX_NUMBER_OF_CHILDREN
   }
 }
 
