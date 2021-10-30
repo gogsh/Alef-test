@@ -1,4 +1,4 @@
-import { PreviewLayout } from './Preview-styles'
+import { PreviewLayout, ChildrenСontainer, ChildLabel } from './Preview-styles'
 import { IForm } from '../../Types'
 import declinationOfYears from '../../helpers/declinationOfNum'
 
@@ -10,27 +10,41 @@ const Preview: React.FC<Props> = ({ personalData }) => {
   return (
     <PreviewLayout>
       <h2>Персональные данные</h2>
-      <strong>
-        {`${personalData.name},
+      {personalData.name && personalData.age ? (
+        <strong>
+          {`${personalData.name},
         ${personalData.age}
         ${declinationOfYears(+personalData.age)}`}
-      </strong>
+        </strong>
+      ) : (
+        <strong>Нет данных. Заполните форму</strong>
+      )}
 
-      <div>
-        <span>Дети</span>
-        {personalData.children.map(child => {
-          if (child.name.trim() && child.age) {
-            return (
-              <div>
-                <strong>
-                  {`${child.name} ${child.age}
+      <ChildrenСontainer>
+        <h2>Дети</h2>
+        {personalData.children.length ? (
+          personalData.children.map(child => {
+            if (child.name.trim() && child.age) {
+              return (
+                <ChildLabel>
+                  <strong>
+                    {`${child.name}, ${child.age}
                 ${declinationOfYears(+child.age)}`}
-                </strong>
-              </div>
-            )
-          }
-        })}
-      </div>
+                  </strong>
+                </ChildLabel>
+              )
+            } else {
+              return (
+                <ChildLabel>
+                  <strong>Заполните информацию о ребёнке</strong>
+                </ChildLabel>
+              )
+            }
+          })
+        ) : (
+          <strong>Детей нет</strong>
+        )}
+      </ChildrenСontainer>
     </PreviewLayout>
   )
 }
