@@ -2,8 +2,12 @@ import { createGlobalStyle } from 'styled-components'
 import 'normalize.css'
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  *{
     font-family: 'Montserrat-Regular';
+    font-size: 13px;
+  }
+  strong {
+    font-family: 'Montserrat-Bold';
   }
 
   @font-face {
@@ -37,6 +41,19 @@ const GlobalStyle = createGlobalStyle`
 
     font-weight: bold;
     font-style: normal;
+  }
+
+  &[type='number']::-webkit-outer-spin-button,
+  &[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+  &[type='number']:hover,
+  &[type='number']:focus {
+    -moz-appearance: number-input;
   }
 
 `

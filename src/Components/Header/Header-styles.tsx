@@ -10,12 +10,22 @@ export const HeaderLayout = styled.header`
   .Header_logo {
     position: absolute;
     left: 10%;
+    cursor: pointer;
   }
 
   nav {
     ul {
       li {
         display: inline;
+        margin: 12px;
+        button {
+          font-size: 14px;
+          background: none;
+          padding: 0;
+          cursor: pointer;
+          border: none;
+          color: ${props => props.theme.gray};
+        }
       }
     }
   }
