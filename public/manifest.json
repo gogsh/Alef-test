@@ -1,0 +1,6 @@
+{
+  "short_name": "Alef test",
+  "name": "Alef test",
+  "start_url": "/",
+  "display": "standalone"
+}

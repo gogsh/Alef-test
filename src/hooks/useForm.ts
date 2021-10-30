@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IForm, Pages } from '../Types'
+import { IForm } from '../Types'
 
 const useForm = () => {
   const MAX_NUMBER_OF_CHILDREN = 5
