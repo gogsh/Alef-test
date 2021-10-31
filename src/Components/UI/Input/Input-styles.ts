@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.label`
   border: 1px solid ${props => props.theme.border};
   border-radius: 4px;
   height: 40px;

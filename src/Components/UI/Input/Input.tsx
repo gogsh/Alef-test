@@ -19,16 +19,10 @@ interface Props {
 }
 
 const Input: React.FC<Props> = ({ onChange, label, name, value, inputmode, type }) => {
-  const hiddenInputClass = 'test' + Math.round(Math.random() * 1e12)
-  const onClickContainer = () => {
-    const a: HTMLElement | null = document.querySelector('.' + hiddenInputClass)
-    a?.focus()
-  }
-
   return (
-    <InputContainer onClick={onClickContainer}>
+    <InputContainer>
       <HiddenInput
-        className={`Input_hidden-input ${hiddenInputClass}`}
+        className={`Input_hidden-input`}
         name={name}
         onChange={onChange}
         value={value}
